@@ -41,7 +41,6 @@ def index():
 if __name__ == '__main__':
     app.run(debug=True)
 
-# openai.api_key = "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"
 
 # def get_recipe_suggestions(user_message):
 #     # Create a conversation with the system message as a cooking assistant and the user message
