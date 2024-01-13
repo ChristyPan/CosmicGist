@@ -1,18 +1,19 @@
 import './App.css';
 
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function App() {
-  // State to store the value of the input
   const [inputValue, setInputValue] = useState('');
-  // State to store the summarized text
   const [summarizedText, setSummarizedText] = useState('');
 
-  // Function to handle text summarization (replace this with your logic)
-  const summarizeText = () => {
-    // Replace this logic with your text summarization logic
-    const summarized = inputValue;
-    setSummarizedText(summarized);
+  const handleSummarize = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/summarize', { text: inputValue });
+      setSummarizedText(response.data.summarizedText);
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
@@ -29,7 +30,7 @@ function App() {
           style={{ padding: '10px', fontSize: '16px', border: '1px solid #ccc', borderRadius: '5px' }}
         />
 
-        <button onClick={summarizeText} style={{ padding: '10px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+        <button onClick={handleSummarize} style={{ padding: '10px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
           Summarize
         </button>
 
