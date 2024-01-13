@@ -24,16 +24,23 @@ function App() {
 
         {/* Input box with onChange handler to update the state */}
         <input
-          type="text"
-          placeholder="Input a website URL"
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-          style={{ padding: '10px', fontSize: '16px', border: '1px solid #ccc', borderRadius: '5px' }}
-        />
+        type="text"
+        placeholder="Input a website URL"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            handleSummarize();
+          }
+        }}
+        style={{ padding: '10px', fontSize: '16px', border: '1px solid #ccc', borderRadius: '5px' }}
+      />
 
-        <button onClick={handleSummarize} style={{ padding: '10px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-          Summarize
-        </button>
+      <button 
+        onClick={handleSummarize} 
+        style={{ padding: '10px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+        Summarize
+      </button>
 
         {/* Display summarized text in a box */}
           <div style={{ marginTop: '20px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#e6e6e6', borderRadius: '5px', height: '350px', width: '800px'}}>
