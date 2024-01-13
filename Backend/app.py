@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+import os
 
 app = Flask(__name__)
 
@@ -11,6 +12,14 @@ def summarize():
     summarized_text = input_text.upper()
 
     return jsonify({'summarizedText': summarized_text})
+
+@app.route('/')
+def index():
+    return app.send_static_file('index.html')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
 
 # openai.api_key = "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"
 
@@ -31,5 +40,3 @@ def summarize():
 #     assistant_reply = response['choices'][0]['message']['content']
 #     return assistant_reply
 
-if __name__ == '__main__':
-    app.run(debug=True)

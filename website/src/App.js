@@ -9,12 +9,13 @@ function App() {
 
   const handleSummarize = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/summarize', { text: inputValue });
+      const response = await axios.post('/api/summarize', { text: inputValue });
       setSummarizedText(response.data.summarizedText);
     } catch (error) {
       console.error('Error:', error);
     }
   };
+  
 
   return (
     <div className="App" style={{ padding: '10px' }}>
@@ -35,13 +36,9 @@ function App() {
         </button>
 
         {/* Display summarized text in a box */}
-        <div style={{ marginTop: '20px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#e6e6e6', borderRadius: '5px', height: '350px', width: '800px'}}>
-          <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#555', overflowY: 'auto', maxHeight: '300px' }}>{summarizedText}</p>
-        </div>
-
-
-
-        
+          <div style={{ marginTop: '20px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#e6e6e6', borderRadius: '5px', height: '350px', width: '800px'}}>
+            <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#555', overflowY: 'auto', maxHeight: '300px' }}>{summarizedText}</p>
+          </div>
       </header>
     </div>
   );
