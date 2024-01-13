@@ -9,7 +9,7 @@ function App() {
 
   const handleSummarize = async () => {
     try {
-      const response = await axios.post('/api/summarize', { text: inputValue });
+      const response = await axios.post('/api/summarize', { url: inputValue });
       setSummarizedText(response.data.summarizedText);
     } catch (error) {
       console.error('Error:', error);

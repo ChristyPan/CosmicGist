@@ -1,17 +1,38 @@
 from flask import Flask, jsonify, request
+import requests
+from bs4 import BeautifulSoup
 import os
 
 app = Flask(__name__)
 
+def extract_text_from_url(url):
+    try:
+        headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'}
+        
+        # Fetch the HTML content of the website
+        response = requests.get(url, headers=headers)
+        response.raise_for_status()  # Raise an exception for bad requests
+
+        # Parse the HTML content
+        soup = BeautifulSoup(response.text, 'html.parser')
+
+        # Extract text from HTML
+        text = ' '.join([p.get_text() for p in soup.find_all('p')])
+
+        return text
+    except Exception as e:
+        return str(e)
+
 @app.route('/api/summarize', methods=['POST'])
 def summarize():
-    data = request.get_json()
-    input_text = data.get('text', '')
-    
-    # Implement your summarization logic here
-    summarized_text = input_text.upper()
+    try:
+        url = request.json.get('url')
 
-    return jsonify({'summarizedText': summarized_text})
+        summarized_text = extract_text_from_url(url)
+
+        return jsonify({'summarizedText': summarized_text})
+    except Exception as e:
+        return jsonify({'error': str(e)})
 
 @app.route('/')
 def index():
@@ -19,7 +40,6 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
 
 # openai.api_key = "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"
 
