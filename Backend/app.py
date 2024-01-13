@@ -1,7 +1,15 @@
 from flask import Flask, jsonify, request
 import requests
 from bs4 import BeautifulSoup
+from openai import OpenAI
 import os
+
+
+os.environ['OPENAI_API_KEY'] =  "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"
+client = OpenAI(
+  api_key=os.environ['OPENAI_API_KEY'],  # this is also the default, it can be omitted
+)
+
 
 app = Flask(__name__)
 
@@ -13,22 +21,59 @@ def extract_text_from_url(url):
         response = requests.get(url, headers=headers)
         response.raise_for_status()  # Raise an exception for bad requests
 
-        # Parse the HTML content
-        soup = BeautifulSoup(response.text, 'html.parser')
+        if response.status_code == 200:
+            # Parse the HTML content
+            soup = BeautifulSoup(response.text, 'html.parser')
 
-        # Extract text from HTML
-        text = ' '.join([p.get_text() for p in soup.find_all('p')])
+            # Extract text from HTML
+            paragraphs = soup.find_all('p')
+            text = ' '.join([p.get_text() for p in paragraphs])
+            text = text[:200]
+
+            # Debug print
+            print("Extracted Text:", text)
+        else:
+            text = 'Failed to retrieve website'
 
         return text
     except Exception as e:
         return str(e)
+
+def get_text_summarization(user_message):
+    conversation = [
+        {"role": "system", "content": "Summarize this text from a website"},
+        {"role": "user", "content": user_message},
+    ]
+
+    print('conversation set')
+
+    # Generate a response from the assistant
+    try:
+        response = client.completions.create(
+            model="gpt-3.5-turbo",
+            prompt=conversation,
+        )
+    except Exception as e:
+        print("Error in OpenAI API call:", str(e))
+
+    print(response)
+
+    # Extract and return the assistant's reply
+    assistant_reply = response.choices[0].text
+    return assistant_reply
 
 @app.route('/api/summarize', methods=['POST'])
 def summarize():
     try:
         url = request.json.get('url')
 
-        summarized_text = extract_text_from_url(url)
+        extracted_text = extract_text_from_url(url)
+
+        print('\ngetting to here')
+
+        summarized_text = get_text_summarization(extracted_text)
+
+        print(summarized_text)
 
         return jsonify({'summarizedText': summarized_text})
     except Exception as e:
@@ -41,21 +86,4 @@ def index():
 if __name__ == '__main__':
     app.run(debug=True)
 
-
-# def get_recipe_suggestions(user_message):
-#     # Create a conversation with the system message as a cooking assistant and the user message
-#     conversation = [
-#         {"role": "system", "content": "You are a cooking assistant."},
-#         {"role": "user", "content": user_message},
-#     ]
-
-#     # Generate a response from the assistant
-#     response = openai.ChatCompletion.create(
-#         model="gpt-3.5-turbo",
-#         messages=conversation
-#     )
-
-#     # Extract and return the assistant's reply
-#     assistant_reply = response['choices'][0]['message']['content']
-#     return assistant_reply
 
