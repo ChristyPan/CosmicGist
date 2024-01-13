@@ -5,23 +5,46 @@ import React, { useState } from 'react';
 function App() {
   // State to store the value of the input
   const [inputValue, setInputValue] = useState('');
+  // State to store the summarized text
+  const [summarizedText, setSummarizedText] = useState('');
+
+  // Function to handle text summarization (replace this with your logic)
+  const summarizeText = () => {
+    // Replace this logic with your text summarization logic
+    const summarized = inputValue;
+    setSummarizedText(summarized);
+  };
 
   return (
-    <div className="App">
+    <div className="App" style={{ padding: '10px' }}>
       <header className="App-header">
-        <h1>Website Summerizer</h1>
+        <h1 style={{ marginTop: '-50px' }}>Website Summarizer</h1>
 
         {/* Input box with onChange handler to update the state */}
         <input
           type="text"
-          placeholder="Type something..."
+          placeholder="Input a website URL"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
+          style={{ padding: '10px', fontSize: '16px', border: '1px solid #ccc', borderRadius: '5px' }}
         />
+
+        <button onClick={summarizeText} style={{ padding: '10px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+          Summarize
+        </button>
+
+        {/* Display summarized text in a box */}
+        <div style={{ marginTop: '20px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#e6e6e6', borderRadius: '5px', height: '350px', width: '800px'}}>
+          <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#555', overflowY: 'auto', maxHeight: '300px' }}>{summarizedText}</p>
+        </div>
+
+
+
+        
       </header>
     </div>
   );
 }
 
-
 export default App;
+
