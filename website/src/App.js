@@ -98,7 +98,7 @@ function App() {
         {/* Past Searches block */}
         <div style={{ marginTop: '-385px', marginLeft: '1000px', padding: '5px', height: '400px', width: '300px', overflowY: 'auto', boxSizing: 'border-box', backgroundColor: 'rgba(211, 211, 211, 0.2)' }}>
           {priorURLs.slice().reverse().map((summary, index) => (
-            <p key={index} style={{ fontSize: '14px', border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '5px 0', overflowX: 'hidden' }}>{summary}</p>
+            <p key={index} style={{ fontSize: '12px', border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '5px 0', overflowX: 'hidden', fontFamily: 'Roboto-Medium' }}>{summary}</p>
           ))}
         </div>
       </header>
