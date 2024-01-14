@@ -76,6 +76,7 @@ def summarize():
         summarized_text = get_text_summarization(extracted_text)
 
         return jsonify({'summarizedText': summarized_text})
+        return jsonify({'summarizedText': summarized_text})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
