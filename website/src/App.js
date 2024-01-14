@@ -2,6 +2,7 @@ import './App.css';
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import background from "./WallPaper.jpg";
 
 
 function App() {
@@ -37,14 +38,14 @@ function App() {
       
       // Check if the URL is not already in the list before adding it
       setPriorURLs([...priorURLs, inputValue]);
-      
+
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
   return (
-    <div className="App" style={{ padding: '20px' }}>
+    <div className="App" style={{backgroundImage: `url(${background})`, backgroundSize: 'auto', position: 'relative'}}>
       <header className="App-header">
         <h1 style={{ marginTop: '-10px', borderBottom: '2px solid #fff' }}>Website Summarizer</h1>
 
