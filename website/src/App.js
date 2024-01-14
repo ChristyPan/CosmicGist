@@ -88,7 +88,7 @@ function App() {
         </label>
 
         {/* Summarize block */}
-        <div style={{ marginTop: '30px', marginRight: '200px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#d3d3d3', borderRadius: '5px', height: '375px', width: '800px', overflowY: 'auto' }}>
+        <div style={{ marginTop: '30px', marginRight: '200px', border: '1px solid #ccc', padding: '6px', backgroundColor: '#d3d3d3', borderRadius: '5px', height: '375px', width: '800px', overflowY: 'auto' }}>
           {summarizedText.split('\n').map((line, index) => (
             <p key={index} style={{ fontSize: '16px', lineHeight: '1.2', color: '#555', overflowX: 'hidden', fontFamily: 'Roboto-Medium', textAlign: 'left' }}>{line}</p>
           ))}
