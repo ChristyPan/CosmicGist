@@ -2,7 +2,7 @@ import './App.css';
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import background from "./WallPaperPink.jpg";
+import background from "./WallPaper.jpg";
 
 
 function App() {
@@ -50,13 +50,13 @@ function App() {
         <h1 style={{ marginTop: '-10px', borderBottom: '2px solid #fff', fontFamily: "Poppins-Bold" }}>Website Summarizer</h1>
 
         <img
-        src="/reading.png"
+        src="/AIlogo.jpg"
         alt=""
         style={{
           marginTop: '-100px',   // Adjust the top margin
-          marginLeft: '-700px',   // Adjust the left margin
-          width: '125px',
-          height: '80px'
+          marginLeft: '-650px',   // Adjust the left margin
+          width: '100px',
+          height: '100px'
         }}>
         </img>
 
