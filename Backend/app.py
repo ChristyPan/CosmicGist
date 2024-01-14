@@ -4,14 +4,14 @@ from bs4 import BeautifulSoup
 from openai import OpenAI
 import os
 import re
+from dotenv import load_dotenv
 
+# Load OpenAI API key from environment variable or use an empty string
+os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY', "")
+OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
 
-os.environ['OPENAI_API_KEY'] =  ""
-client = OpenAI(
-  api_key=os.environ['OPENAI_API_KEY'],  # this is also the default, it can be omitted
-)
-
-
+# Initialize OpenAI client
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 app = Flask(__name__)
 
@@ -34,8 +34,10 @@ def extract_text_from_url(url):
             text = 'Failed to retrieve website'
 
         return text
+    except requests.RequestException as e:
+        return f"Error fetching website content: {str(e)}"
     except Exception as e:
-        return str(e)
+        return f"An unexpected error occurred: {str(e)}"
 
 def get_text_summarization(user_message):
     conversation = [
@@ -43,31 +45,30 @@ def get_text_summarization(user_message):
         {"role": "user", "content": user_message},
     ]
 
-    # Generate a response from the assistant
     try:
         response = client.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=conversation,
         )
+        assistant_reply = response.choices[0].message.content
+        return assistant_reply
     except Exception as e:
-        print("Error in OpenAI API call:", str(e))
-
-    # Extract and return the assistant's reply
-    assistant_reply = response.choices[0].message.content
-    return assistant_reply
+        return f"Error in OpenAI API call: {str(e)}"
 
 @app.route('/api/summarize', methods=['POST'])
 def summarize():
     try:
         url = request.json.get('url')
 
+        if not url:
+            return jsonify({'error': 'URL is required'}), 400
+
         extracted_text = extract_text_from_url(url)
+        summarized_text = get_text_summarization(extracted_text)
 
-        #summarized_text = get_text_summarization(extracted_text)
-
-        return jsonify({'summarizedText': extracted_text})
+        return jsonify({'summarizedText': summarized_text})
     except Exception as e:
-        return jsonify({'error': str(e)})
+        return jsonify({'error': str(e)}), 500
 
 @app.route('/')
 def index():
@@ -75,5 +76,3 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
