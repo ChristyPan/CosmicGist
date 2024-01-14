@@ -28,7 +28,6 @@ def extract_text_from_url(url):
             # Extract text from HTML
             paragraphs = soup.find_all('p')
             text = ' '.join([p.get_text() for p in paragraphs])
-            text = text[:200]
 
             # Debug print
             print("Extracted Text:", text)

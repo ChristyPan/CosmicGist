@@ -22,12 +22,22 @@ function App() {
 
   const handleSummarize = async () => {
     try {
+      // Simple URL validation using a regular expression
+      const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
+      if (!urlRegex.test(inputValue)) {
+        console.error('Invalid URL');
+        return;
+      }
+  
       const response = await axios.post('/api/summarize', { url: inputValue });
       const newSummary = response.data.summarizedText;
-
+  
       // Update the state with the new summary and add it to prior summaries
       setSummarizedText(newSummary);
+      
+      // Check if the URL is not already in the list before adding it
       setPriorURLs([...priorURLs, inputValue]);
+      
     } catch (error) {
       console.error('Error:', error);
     }
@@ -61,15 +71,15 @@ function App() {
         </button>
 
         {/* Summarize block */}
-        <div style={{ marginTop: '30px', marginRight: '200px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#e6e6e6', borderRadius: '5px', height: '375px', width: '850px' }}>
-          <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#555', overflowY: 'auto', maxHeight: '340px' }}>{summarizedText}</p>
+        <div style={{ marginTop: '30px', marginRight: '200px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#e6e6e6', borderRadius: '5px', height: '375px', width: '850px', overflowY: 'auto' }}>
+          <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#555', maxHeight: '340px', overflowY: 'auto' }}>{summarizedText}</p>
+        </div>
 
         {/* Past Searches block */}
-        <div style={{ marginTop: '-200px', marginLeft: '850px', padding: '10px', height: '510px', width: '300px', overflowY: 'auto', boxSizing: 'border-box'}}>
+        <div style={{ marginTop: '-550px', marginLeft: '950px', padding: '10px', height: '510px', width: '300px', overflowY: 'auto', boxSizing: 'border-box' }}>
           {priorURLs.map((summary, index) => (
-            <p key={index} style={{ fontSize: '12px', border: '1px solid #ccc', borderRadius: '5px', padding: '5px', margin: '5px 0', overflowX: 'hidden'}}>{summary}</p>
+            <p key={index} style={{ fontSize: '12px', border: '1px solid #ccc', borderRadius: '5px', padding: '5px', margin: '5px 0', overflowX: 'hidden' }}>{summary}</p>
           ))}
-          </div>
         </div>
       </header>
     </div>
