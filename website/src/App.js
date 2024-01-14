@@ -65,6 +65,7 @@ function App() {
 
         {/* Summarize Button */}
         <button
+          onClick={handleSummarize}
           style={{ marginTop: '-46px', marginLeft: '-100px', padding: '12px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
           Summarize
         </button>
