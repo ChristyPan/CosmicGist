@@ -10,7 +10,6 @@ os.environ['OPENAI_API_KEY'] =  ""
 client = OpenAI(
   api_key=os.environ['OPENAI_API_KEY'],  # this is also the default, it can be omitted
 )
-endpoint_url = 'v1/engines/davinci-codex/completions'
 
 
 
