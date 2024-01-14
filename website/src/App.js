@@ -2,7 +2,7 @@ import './App.css';
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import background from "./WallPaper.jpg";
+import background from "./WallPaperPink.jpg";
 
 
 function App() {
@@ -45,7 +45,7 @@ function App() {
   };
 
   return (
-    <div className="App" style={{backgroundImage: `url(${background})`, backgroundSize: 'auto', position: 'relative'}}>
+    <div className="App" style={{backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
       <header className="App-header">
         <h1 style={{ marginTop: '-10px', borderBottom: '2px solid #fff' }}>Website Summarizer</h1>
 
