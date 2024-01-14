@@ -45,8 +45,6 @@ def get_text_summarization(user_message):
         {"role": "user", "content": user_message},
     ]
 
-    print('conversation set')
-
     # Generate a response from the assistant
     try:
         response = client.completions.create(
@@ -55,8 +53,6 @@ def get_text_summarization(user_message):
         )
     except Exception as e:
         print("Error in OpenAI API call:", str(e))
-
-    print(response)
 
     # Extract and return the assistant's reply
     assistant_reply = response.choices[0].text
@@ -69,13 +65,9 @@ def summarize():
 
         extracted_text = extract_text_from_url(url)
 
-        print('\ngetting to here')
+        #summarized_text = get_text_summarization(extracted_text)
 
-        summarized_text = get_text_summarization(extracted_text)
-
-        print(summarized_text)
-
-        return jsonify({'summarizedText': summarized_text})
+        return jsonify({'summarizedText': extracted_text})
     except Exception as e:
         return jsonify({'error': str(e)})
 
