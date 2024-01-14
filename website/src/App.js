@@ -71,13 +71,13 @@ function App() {
               handleSummarize();
             }
           }}
-          style={{ marginTop: '20px', marginLeft: '-500px', padding: '15px', fontSize: '18px', border: '1px solid #ccc', borderRadius: '5px', color: '#555', fontFamily: 'Roboto-Medium', backgroundColor: '#d3d3d3'}}
+          style={{ marginTop: '20px', marginLeft: '-500px', padding: '15px', fontSize: '18px', border: '1px solid #ccc', borderRadius: '5px', color: '#555', fontFamily: 'Roboto-Medium', backgroundColor: '#d3d3d3', width: '400px'}}
         />
 
         {/* Summarize Button */}
         <button
           onClick={handleSummarize}
-          style={{ marginTop: '-45px', marginLeft: '-100px', padding: '12px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+          style={{ marginTop: '-45px', marginLeft: '75px', padding: '12px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
           Summarize
         </button>
 
