@@ -3,12 +3,15 @@ import requests
 from bs4 import BeautifulSoup
 from openai import OpenAI
 import os
+import re
 
 
-os.environ['OPENAI_API_KEY'] =  "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"
+os.environ['OPENAI_API_KEY'] =  ""
 client = OpenAI(
   api_key=os.environ['OPENAI_API_KEY'],  # this is also the default, it can be omitted
 )
+endpoint_url = 'v1/engines/davinci-codex/completions'
+
 
 
 app = Flask(__name__)
@@ -37,21 +40,21 @@ def extract_text_from_url(url):
 
 def get_text_summarization(user_message):
     conversation = [
-        {"role": "system", "content": "Summarize this text from a website"},
+        {"role": "system", "content": "Summarize this text from a website in bullet form"},
         {"role": "user", "content": user_message},
     ]
 
     # Generate a response from the assistant
     try:
-        response = client.completions.create(
+        response = client.chat.completions.create(
             model="gpt-3.5-turbo",
-            prompt=conversation,
+            messages=conversation,
         )
     except Exception as e:
         print("Error in OpenAI API call:", str(e))
 
     # Extract and return the assistant's reply
-    assistant_reply = response.choices[0].text
+    assistant_reply = response.choices[0].message.content
     return assistant_reply
 
 @app.route('/api/summarize', methods=['POST'])

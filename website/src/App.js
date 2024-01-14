@@ -2,7 +2,7 @@ import './App.css';
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import background from "./WallPaper.jpg";
+import background from "./GalaxyWP.jpg";
 
 
 function App() {
@@ -47,18 +47,18 @@ function App() {
   return (
     <div className="App" style={{backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
       <header className="App-header">
-        <h1 style={{ marginTop: '-10px', borderBottom: '2px solid #fff', fontFamily: "Poppins-Bold" }}>Website Summarizer</h1>
+        <h1 style={{ marginTop: '-10px', borderBottom: '2px solid #fff', fontFamily: "Poppins-Bold", color: '#d3d3d3' }}>CosmicGist</h1>
 
-        <img
-        src="/AIlogo.jpg"
+        {/* <img
+        src="/GalaxySwirllogo.jpg"
         alt=""
         style={{
           marginTop: '-100px',   // Adjust the top margin
-          marginLeft: '-650px',   // Adjust the left margin
+          marginLeft: '-425px',   // Adjust the left margin
           width: '100px',
           height: '100px'
         }}>
-        </img>
+        </img> */}
 
         {/* Input box */}
         <input
@@ -71,7 +71,7 @@ function App() {
               handleSummarize();
             }
           }}
-          style={{ marginTop: '20px', marginLeft: '-500px', padding: '15px', fontSize: '18px', border: '1px solid #ccc', borderRadius: '5px', color: '#555', fontFamily: 'Roboto-Medium'}}
+          style={{ marginTop: '20px', marginLeft: '-500px', padding: '15px', fontSize: '18px', border: '1px solid #ccc', borderRadius: '5px', color: '#555', fontFamily: 'Roboto-Medium', backgroundColor: '#d3d3d3'}}
         />
 
         {/* Summarize Button */}
@@ -83,19 +83,22 @@ function App() {
 
         {/* Past Search Header */}
         <label
-          style={{marginTop: '-45px', marginLeft: '1000px', padding: '12px', fontSize: '16px', background: '#942b68', color: '#fff', border: 'none', borderRadius: '5px'}}>
-          Recentl URLs
+          style={{marginTop: '-45px', marginLeft: '1000px', padding: '12px', fontSize: '16px', background: '#b90076', color: '#fff', border: 'none', borderRadius: '5px'}}>
+          Recent URLs
         </label>
 
         {/* Summarize block */}
-        <div style={{ marginTop: '30px', marginRight: '200px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#ffffff', borderRadius: '5px', height: '375px', width: '850px', overflowY: 'auto' }}>
-          <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#555', maxHeight: '340px', overflowY: 'auto' }}>{summarizedText}</p>
+        <div style={{ marginTop: '30px', marginRight: '200px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#d3d3d3', borderRadius: '5px', height: '375px', width: '800px', overflowY: 'auto' }}>
+          {summarizedText.split('\n').map((line, index) => (
+            <p key={index} style={{ fontSize: '16px', lineHeight: '1.2', color: '#555', overflowX: 'hidden', fontFamily: 'Roboto-Medium', textAlign: 'left' }}>{line}</p>
+          ))}
         </div>
 
+
         {/* Past Searches block */}
-        <div style={{ marginTop: '-385px', marginLeft: '1000px', padding: '5px', height: '400px', width: '300px', overflowY: 'auto', boxSizing: 'border-box' }}>
-          {priorURLs.map((summary, index) => (
-            <p key={index} style={{ fontSize: '12px', border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '5px 0', overflowX: 'hidden' }}>{summary}</p>
+        <div style={{ marginTop: '-385px', marginLeft: '1000px', padding: '5px', height: '400px', width: '300px', overflowY: 'auto', boxSizing: 'border-box', backgroundColor: 'rgba(211, 211, 211, 0.2)' }}>
+          {priorURLs.slice().reverse().map((summary, index) => (
+            <p key={index} style={{ fontSize: '14px', border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '5px 0', overflowX: 'hidden' }}>{summary}</p>
           ))}
         </div>
       </header>
