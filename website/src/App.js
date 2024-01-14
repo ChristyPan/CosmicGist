@@ -1,55 +1,79 @@
 import './App.css';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+
 
 function App() {
   const [inputValue, setInputValue] = useState('');
   const [summarizedText, setSummarizedText] = useState('');
+  const [priorURLs, setPriorURLs] = useState([]);
+
+  useEffect(() => {
+    const storedURLs = localStorage.getItem('priorURLs');
+    if (storedURLs) {
+      setPriorURLs(JSON.parse(storedURLs));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('priorURLs', JSON.stringify(priorURLs));
+  }, [priorURLs]);
 
   const handleSummarize = async () => {
     try {
       const response = await axios.post('/api/summarize', { url: inputValue });
-      setSummarizedText(response.data.summarizedText);
+      const newSummary = response.data.summarizedText;
+
+      // Update the state with the new summary and add it to prior summaries
+      setSummarizedText(newSummary);
+      setPriorURLs([...priorURLs, inputValue]);
     } catch (error) {
       console.error('Error:', error);
     }
   };
-  
 
   return (
-    <div className="App" style={{ padding: '10px' }}>
+    <div className="App" style={{ padding: '20px' }}>
       <header className="App-header">
-        <h1 style={{ marginTop: '-50px' }}>Website Summarizer</h1>
+        <h1 style={{ marginTop: '-10px', borderBottom: '2px solid #fff' }}>Website Summarizer</h1>
 
-        {/* Input box with onChange handler to update the state */}
+        {/* Input box */}
         <input
-        type="text"
-        placeholder="Input a website URL"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            handleSummarize();
-          }
-        }}
-        style={{ padding: '10px', fontSize: '16px', border: '1px solid #ccc', borderRadius: '5px' }}
-      />
+          type="text"
+          placeholder="Enter Website URL"
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSummarize();
+            }
+          }}
+          style={{ marginTop: '10px', marginLeft: '-500px', padding: '15px', fontSize: '18px', border: '1px solid #ccc', borderRadius: '5px' }}
+        />
 
-      <button 
-        onClick={handleSummarize} 
-        style={{ padding: '10px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-        Summarize
-      </button>
 
-        {/* Display summarized text in a box */}
-          <div style={{ marginTop: '20px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#e6e6e6', borderRadius: '5px', height: '350px', width: '800px'}}>
-            <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#555', overflowY: 'auto', maxHeight: '300px' }}>{summarizedText}</p>
+        {/* Summarize Button */}
+        <button
+          onClick={handleSummarize}
+          style={{ marginTop: '-45px', marginLeft: '-100px', padding: '12px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+          Summarize
+        </button>
+
+        {/* Summarize block */}
+        <div style={{ marginTop: '30px', marginRight: '200px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#e6e6e6', borderRadius: '5px', height: '375px', width: '850px' }}>
+          <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#555', overflowY: 'auto', maxHeight: '340px' }}>{summarizedText}</p>
+
+        {/* Past Searches block */}
+        <div style={{ marginTop: '-200px', marginLeft: '850px', padding: '10px', height: '510px', width: '300px', overflowY: 'auto', boxSizing: 'border-box'}}>
+          {priorURLs.map((summary, index) => (
+            <p key={index} style={{ fontSize: '12px', border: '1px solid #ccc', borderRadius: '5px', padding: '5px', margin: '5px 0', overflowX: 'hidden'}}>{summary}</p>
+          ))}
           </div>
+        </div>
       </header>
     </div>
   );
 }
 
 export default App;
-
