@@ -6,9 +6,17 @@ import os
 import re
 from dotenv import load_dotenv
 
-# Load OpenAI API key from environment variable or use an empty string
+load_dotenv()
+
+#Load OpenAI API key from environment variable or use an empty string
 os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY', "")
 OPENAI_API_KEY = os.environ['OPENAI_API_KEY']
+
+# OPENAI_API_KEY = ""
+# os.environ['OPENAI_API_KEY'] = ""
+# client = OpenAI(
+#   api_key=os.environ['OPENAI_API_KEY'],  # this is also the default, it can be omitted
+# )
 
 # Initialize OpenAI client
 client = OpenAI(api_key=OPENAI_API_KEY)
@@ -64,6 +72,7 @@ def summarize():
             return jsonify({'error': 'URL is required'}), 400
 
         extracted_text = extract_text_from_url(url)
+        
         summarized_text = get_text_summarization(extracted_text)
 
         return jsonify({'summarizedText': summarized_text})
