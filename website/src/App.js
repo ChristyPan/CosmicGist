@@ -47,7 +47,7 @@ function App() {
   return (
     <div className="App" style={{backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
       <header className="App-header">
-        <h1 style={{ marginTop: '-10px', borderBottom: '2px solid #fff', fontFamily: "Poppins-Bold", color: '#d3d3d3' }}>CosmicGist</h1>
+        <h1 style={{ marginTop: '-10px', borderBottom: '2px solid #fff', fontFamily: "Poppins-Bold", color: '#d3d3d3', fontSize: '50px' }}>CosmicGist</h1>
 
         {/* <img
         src="/GalaxySwirllogo.jpg"
@@ -96,7 +96,7 @@ function App() {
 
 
         {/* Past Searches block */}
-        <div style={{ marginTop: '-385px', marginLeft: '1000px', padding: '5px', height: '400px', width: '300px', overflowY: 'auto', boxSizing: 'border-box', backgroundColor: 'rgba(211, 211, 211, 0.2)' }}>
+        <div style={{ marginTop: '-385px', marginLeft: '1000px', padding: '5px', height: '385px', width: '300px', overflowY: 'auto', boxSizing: 'border-box', backgroundColor: 'rgba(211, 211, 211, 0.2)' }}>
           {priorURLs.slice().reverse().map((summary, index) => (
             <p key={index} style={{ fontSize: '12px', border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '5px 0', overflowX: 'hidden', fontFamily: 'Roboto-Medium' }}>{summary}</p>
           ))}
