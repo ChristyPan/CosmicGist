@@ -64,6 +64,8 @@ def summarize():
 
         extracted_text = extract_text_from_url(url)
 
+        print('made it')
+
         #summarized_text = get_text_summarization(extracted_text)
 
         return jsonify({'summarizedText': extracted_text})
