@@ -35,3 +35,27 @@
     transform: rotate(360deg);
   }
 }
+
+@font-face {
+  font-family: Anton-Regular;
+  src: url(../public/Anton-Regular.ttf);
+}
+.Anton-Regular {
+  font-family: Anton-Regular;
+}
+
+@font-face {
+  font-family: Poppins-Bold;
+  src: url(../public/Poppins-Bold.ttf);
+}
+.Poppins-Bold {
+  font-family: Poppins-Bold;
+}
+
+@font-face {
+  font-family: Roboto-Medium;
+  src: url(../public/Roboto-Medium.ttf);
+}
+.Roboto-Medium {
+  font-family: Roboto-Medium;
+}

@@ -47,7 +47,7 @@ function App() {
   return (
     <div className="App" style={{backgroundImage: `url(${background})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat'}}>
       <header className="App-header">
-        <h1 style={{ marginTop: '-10px', borderBottom: '2px solid #fff' }}>Website Summarizer</h1>
+        <h1 style={{ marginTop: '-10px', borderBottom: '2px solid #fff', fontFamily: "Poppins-Bold" }}>Website Summarizer</h1>
 
         {/* Input box */}
         <input
@@ -60,7 +60,7 @@ function App() {
               handleSummarize();
             }
           }}
-          style={{ marginTop: '10px', marginLeft: '-500px', padding: '15px', fontSize: '18px', border: '1px solid #ccc', borderRadius: '5px' }}
+          style={{ marginTop: '10px', marginLeft: '-500px', padding: '15px', fontSize: '18px', border: '1px solid #ccc', borderRadius: '5px', color: '#555', fontFamily: 'Roboto-Medium'}}
         />
 
 
@@ -72,7 +72,7 @@ function App() {
         </button>
 
         {/* Summarize block */}
-        <div style={{ marginTop: '30px', marginRight: '200px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#e6e6e6', borderRadius: '5px', height: '375px', width: '850px', overflowY: 'auto' }}>
+        <div style={{ marginTop: '30px', marginRight: '200px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#ffffff', borderRadius: '5px', height: '375px', width: '850px', overflowY: 'auto' }}>
           <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#555', maxHeight: '340px', overflowY: 'auto' }}>{summarizedText}</p>
         </div>
 
