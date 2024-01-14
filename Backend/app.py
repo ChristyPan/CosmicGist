@@ -6,7 +6,7 @@ import os
 import re
 
 
-os.environ['OPENAI_API_KEY'] =  ""
+os.environ['OPENAI_API_KEY'] = ""
 client = OpenAI(
   api_key=os.environ['OPENAI_API_KEY'],  # this is also the default, it can be omitted
 )
@@ -63,9 +63,9 @@ def summarize():
 
         extracted_text = extract_text_from_url(url)
 
-        #summarized_text = get_text_summarization(extracted_text)
+        summarized_text = get_text_summarization(extracted_text)
 
-        return jsonify({'summarizedText': extracted_text})
+        return jsonify({'summarizedText': summarized_text})
     except Exception as e:
         return jsonify({'error': str(e)})
 
