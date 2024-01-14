@@ -63,13 +63,17 @@ function App() {
           style={{ marginTop: '10px', marginLeft: '-500px', padding: '15px', fontSize: '18px', border: '1px solid #ccc', borderRadius: '5px', color: '#555', fontFamily: 'Roboto-Medium'}}
         />
 
-
         {/* Summarize Button */}
         <button
-          onClick={handleSummarize}
           style={{ marginTop: '-45px', marginLeft: '-100px', padding: '12px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
           Summarize
         </button>
+
+        {/* Past Search Header */}
+        <label
+          style={{marginTop: '-45px', marginLeft: '1000px', padding: '12px', fontSize: '16px', background: '#942b68', color: '#fff', border: 'none', borderRadius: '5px'}}>
+          Recently Searched
+        </label>
 
         {/* Summarize block */}
         <div style={{ marginTop: '30px', marginRight: '200px', border: '1px solid #ccc', padding: '2px', backgroundColor: '#ffffff', borderRadius: '5px', height: '375px', width: '850px', overflowY: 'auto' }}>
@@ -77,9 +81,9 @@ function App() {
         </div>
 
         {/* Past Searches block */}
-        <div style={{ marginTop: '-550px', marginLeft: '950px', padding: '10px', height: '510px', width: '300px', overflowY: 'auto', boxSizing: 'border-box' }}>
+        <div style={{ marginTop: '-385px', marginLeft: '1000px', padding: '5px', height: '400px', width: '300px', overflowY: 'auto', boxSizing: 'border-box' }}>
           {priorURLs.map((summary, index) => (
-            <p key={index} style={{ fontSize: '12px', border: '1px solid #ccc', borderRadius: '5px', padding: '5px', margin: '5px 0', overflowX: 'hidden' }}>{summary}</p>
+            <p key={index} style={{ fontSize: '12px', border: '1px solid #ccc', borderRadius: '5px', padding: '8px', margin: '5px 0', overflowX: 'hidden' }}>{summary}</p>
           ))}
         </div>
       </header>
