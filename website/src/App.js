@@ -49,6 +49,17 @@ function App() {
       <header className="App-header">
         <h1 style={{ marginTop: '-10px', borderBottom: '2px solid #fff', fontFamily: "Poppins-Bold" }}>Website Summarizer</h1>
 
+        <img
+        src="/reading.png"
+        alt=""
+        style={{
+          marginTop: '-100px',   // Adjust the top margin
+          marginLeft: '-700px',   // Adjust the left margin
+          width: '125px',
+          height: '80px'
+        }}>
+        </img>
+
         {/* Input box */}
         <input
           type="text"
@@ -60,20 +71,20 @@ function App() {
               handleSummarize();
             }
           }}
-          style={{ marginTop: '10px', marginLeft: '-500px', padding: '15px', fontSize: '18px', border: '1px solid #ccc', borderRadius: '5px', color: '#555', fontFamily: 'Roboto-Medium'}}
+          style={{ marginTop: '20px', marginLeft: '-500px', padding: '15px', fontSize: '18px', border: '1px solid #ccc', borderRadius: '5px', color: '#555', fontFamily: 'Roboto-Medium'}}
         />
 
         {/* Summarize Button */}
         <button
           onClick={handleSummarize}
-          style={{ marginTop: '-46px', marginLeft: '-100px', padding: '12px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
+          style={{ marginTop: '-45px', marginLeft: '-100px', padding: '12px', fontSize: '16px', background: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
           Summarize
         </button>
 
         {/* Past Search Header */}
         <label
           style={{marginTop: '-45px', marginLeft: '1000px', padding: '12px', fontSize: '16px', background: '#942b68', color: '#fff', border: 'none', borderRadius: '5px'}}>
-          Recently Searched
+          Recentl URLs
         </label>
 
         {/* Summarize block */}

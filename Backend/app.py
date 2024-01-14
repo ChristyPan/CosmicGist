@@ -28,9 +28,6 @@ def extract_text_from_url(url):
             # Extract text from HTML
             paragraphs = soup.find_all('p')
             text = ' '.join([p.get_text() for p in paragraphs])
-
-            # Debug print
-            print("Extracted Text:", text)
         else:
             text = 'Failed to retrieve website'
 
@@ -63,8 +60,6 @@ def summarize():
         url = request.json.get('url')
 
         extracted_text = extract_text_from_url(url)
-
-        print('made it')
 
         #summarized_text = get_text_summarization(extracted_text)
 
