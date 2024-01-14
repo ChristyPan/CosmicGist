@@ -14,7 +14,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #f8bcbc;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,6 +26,21 @@
 
 .App-link {
   color: #61dafb;
+}
+
+/* Fading button on hover */
+.fade-on-hover {
+  background-color: #3498db;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.5s ease; /* Add a smooth transition for opacity */
+}
+
+.fade-on-hover:hover {
+  opacity: 0.8; /* Reduce opacity on hover */
 }
 
 @keyframes App-logo-spin {
